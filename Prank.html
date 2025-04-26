@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>گاڵتەکەم!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        #camera {
+            width: 90%;
+            max-width: 400px;
+            border: 3px dashed #ff0000;
+            margin: 20px auto;
+            border-radius: 10px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        h1 {
+            color: #ff4757;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 هاها! تۆ ڕفاندە! 🎉</h1>
+    <p>کامێراکەت چالاککرا، بەڵام وێنەکەت نەنێردرا! 😜</p>
+    
+    <video id="camera" autoplay playsinline></video>
+    
+    <button onclick="stopCamera()">کامێرا دەخەمەوە</button>
+    
+    <script>
+        const video = document.getElementById('camera');
+        
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(err => {
+                alert("کامێرا شکستی هێنا! 😢");
+                console.error(err);
+            });
+
+        function stopCamera() {
+            if (video.srcObject) {
+                video.srcObject.getTracks().forEach(track => track.stop());
+                alert("پشوو دەدەم! وێنەکەت نەنێردرا بۆ هیچ کوێیەک!");
+            }
+        }
+    </script>
+</body>
+</html>
